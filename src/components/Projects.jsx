@@ -7,24 +7,6 @@ export default function Projects() {
 
   const projects = [
     {
-      title: 'SmartHire – AI-Powered Job Application Tracker',
-      description:
-        'A full-stack AI-powered job application tracker that helps users manage applications, track progress, and gain actionable insights through real-time analytics. Built with a scalable microservices architecture and optimized for performance, security, and seamless user experience.',
-      techStack: ['React.js', 'Tailwind CSS','Node.js','Spring Boot','MySQL','REST APIs','Docker','AWS S3','JWT Auth','Chart.js','GitHub Actions'],
-      highlights: [
-        'Secure JWT-based authentication with role-based access control (RBAC)',
-        'Real-time analytics dashboard with application funnels and conversion metrics',
-        '10+ optimized REST APIs with <150ms response time',
-        'Automated follow-up reminders to reduce missed opportunities',
-        'Cloud-based resume storage using AWS S3',
-        'Dockerized deployment with CI/CD pipelines via GitHub Actions',
-        'Responsive, mobile-first UI with fast load times (<1.5s on 3G)'
-      ],
-      githubUrl: '#',
-      //liveUrl: '#',
-      image: '🛍️',
-    },
-    {
       title: 'StayVista – Hotel & Homestay Booking Clone',
       description:
         'An Airbnb-inspired booking platform that allows users to explore, filter, and book stays with real-time data handling. Designed for seamless user experience with secure authentication and dynamic listing management.',
@@ -83,7 +65,7 @@ export default function Projects() {
         'Smooth scroll animations',
         'Fully responsive design',
       ],
-      githubUrl: 'https://github.com',
+      githubUrl: 'https://github.com/Vaish1401/New-Portfolio',
       //liveUrl: '#',
       image: '💼',
     },
