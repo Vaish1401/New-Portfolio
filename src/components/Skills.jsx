@@ -56,10 +56,11 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800"
+      className="relative py-28 md:py-36 px-4 sm:px-6 lg:px-10 bg-gradient-to-b from-blush-100/35 via-white/45 to-blush-50/25 dark:from-gray-950 dark:via-ink dark:to-gray-950"
       ref={ref}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        <p className="section-eyebrow">Capabilities</p>
         <motion.h2
           className="section-title"
           initial={{ opacity: 0, y: -20 }}
@@ -68,6 +69,12 @@ export default function Skills() {
         >
           Skills & Expertise
         </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.6 }}
+          animate={inView ? { opacity: 1, scaleX: 1 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="section-divider origin-center"
+        />
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -81,7 +88,7 @@ export default function Skills() {
               variants={itemVariants}
               className="card p-8"
             >
-              <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-6">
+              <h3 className="font-display text-2xl font-semibold text-rose-700 dark:text-rose-300 mb-7 pb-3 border-b border-rose-100/80 dark:border-rose-900/40">
                 {category.category}
               </h3>
 
@@ -90,23 +97,22 @@ export default function Skills() {
                   <div key={skillIndex}>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl">{skill.icon}</span>
-                        <span className="font-semibold text-gray-800 dark:text-gray-200">
+                        <span className="text-xl">{skill.icon}</span>
+                        <span className="font-semibold text-ink/90 dark:text-stone-200">
                           {skill.name}
                         </span>
                       </div>
-                      <span className="text-sm text-blue-600 dark:text-blue-400 font-bold">
+                      <span className="text-sm font-bold text-rose-600 dark:text-rose-300 tabular-nums">
                         {skill.level}%
                       </span>
                     </div>
 
-                    {/* Progress bar */}
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                    <div className="w-full bg-rose-100/80 dark:bg-rose-950/50 rounded-full h-2 overflow-hidden">
                       <motion.div
-                        className="bg-gradient-to-r from-blue-600 to-cyan-500 h-full rounded-full"
+                        className="h-full rounded-full bg-gradient-to-r from-rose-500 via-pink-400 to-rose-400"
                         initial={{ width: 0 }}
                         animate={inView ? { width: `${skill.level}%` } : {}}
-                        transition={{ duration: 1, ease: 'easeOut' }}
+                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                       />
                     </div>
                   </div>
@@ -116,17 +122,16 @@ export default function Skills() {
           ))}
         </motion.div>
 
-        {/* Additional Skills */}
         <motion.div
-          className="mt-12 bg-white dark:bg-gray-800 rounded-lg p-8 card"
+          className="mt-14 card p-8 md:p-10"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+          <h3 className="font-display text-2xl font-semibold mb-8 text-ink dark:text-white">
             Key Competencies
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
               'Component Development',
               'State Management',
@@ -139,13 +144,13 @@ export default function Skills() {
             ].map((competency, index) => (
               <motion.div
                 key={index}
-                className="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-rose-50/90 to-pink-50/50 dark:from-rose-950/35 dark:to-pink-950/20 border border-rose-100/60 dark:border-rose-900/30"
                 initial={{ opacity: 0, x: -10 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
               >
-                <span className="text-blue-600 dark:text-blue-400">✓</span>
-                <span className="text-gray-700 dark:text-gray-300">{competency}</span>
+                <span className="text-rose-500 dark:text-rose-400 font-medium">✓</span>
+                <span className="text-ink/80 dark:text-stone-300">{competency}</span>
               </motion.div>
             ))}
           </div>

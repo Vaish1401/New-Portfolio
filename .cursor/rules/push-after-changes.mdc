@@ -1,0 +1,18 @@
+---
+description: Push commits to GitHub after implementing code changes
+alwaysApply: true
+---
+
+# Git Push After Changes
+
+When you modify project files (code, config, or assets) in this repository:
+
+1. **Stage** the relevant changes (`git add` for files you touched).
+2. **Commit** with a clear, conventional message in one line (what changed and why).
+3. **Push** to `origin` on the current branch (typically `main`).
+
+Do this **before ending the turn** once the task is complete and the working tree should reflect the changes on GitHub. If the user only asked for analysis or the repo is unavailable, skip push.
+
+If push fails (auth, network), report the error and what was committed locally.
+
+Remote: `https://github.com/Vaish1401/New-Portfolio.git`

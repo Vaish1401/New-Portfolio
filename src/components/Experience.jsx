@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import { Briefcase, Calendar, MapPin } from 'lucide-react'
+import { Calendar, MapPin } from 'lucide-react'
 
 export default function Experience() {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
@@ -79,10 +79,11 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800"
+      className="py-28 md:py-36 px-4 sm:px-6 lg:px-10 bg-white/45 dark:bg-gray-950/25"
       ref={ref}
     >
       <div className="max-w-4xl mx-auto">
+        <p className="section-eyebrow">Career</p>
         <motion.h2
           className="section-title"
           initial={{ opacity: 0, y: -20 }}
@@ -91,6 +92,12 @@ export default function Experience() {
         >
           Experience
         </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.6 }}
+          animate={inView ? { opacity: 1, scaleX: 1 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="section-divider origin-center"
+        />
 
         <motion.div
           className="relative"
@@ -98,8 +105,7 @@ export default function Experience() {
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          {/* Vertical line */}
-          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-cyan-500" />
+          <div className="hidden md:block absolute left-8 top-3 bottom-3 w-px bg-gradient-to-b from-rose-300 via-pink-300 to-rose-200 dark:from-rose-800 dark:via-rose-700 dark:to-rose-900 rounded-full" />
 
           <div className="space-y-8 md:pl-24">
             {experiences.map((experience, index) => (
@@ -108,40 +114,37 @@ export default function Experience() {
                 variants={itemVariants}
                 className="card p-6 md:p-8 relative"
               >
-                {/* Timeline dot */}
-                <div className="hidden md:block absolute -left-12 mt-2 w-6 h-6 bg-white dark:bg-gray-800 border-4 border-blue-600 rounded-full" />
+                <div className="hidden md:flex absolute -left-[1.85rem] top-9 w-4 h-4 rounded-full bg-white dark:bg-gray-950 border-[3px] border-rose-400 dark:border-rose-500 shadow-sm z-[1]" />
 
-                {/* Header */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    <h3 className="font-display text-2xl font-semibold text-ink dark:text-white">
                       {experience.title}
                     </h3>
-                    <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold mt-1">
+                    <p className="text-lg text-rose-600 dark:text-rose-300 font-medium mt-1">
                       {experience.company}
                     </p>
                   </div>
                   <div className="flex flex-col gap-2 md:text-right">
-                    <div className="flex items-center gap-2 md:justify-end text-gray-600 dark:text-gray-400">
-                      <Calendar size={18} />
+                    <div className="flex items-center gap-2 md:justify-end text-ink-muted dark:text-stone-400 text-sm">
+                      <Calendar size={17} strokeWidth={1.75} />
                       <span>{experience.duration}</span>
                     </div>
-                    <div className="flex items-center gap-2 md:justify-end text-gray-600 dark:text-gray-400">
-                      <MapPin size={18} />
+                    <div className="flex items-center gap-2 md:justify-end text-ink-muted dark:text-stone-400 text-sm">
+                      <MapPin size={17} strokeWidth={1.75} />
                       <span>{experience.location}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Highlights */}
-                <div className="space-y-2 mt-4">
+                <div className="space-y-2.5 mt-5 pt-5 border-t border-rose-100/70 dark:border-rose-900/40">
                   {experience.highlights.map((highlight, hIndex) => (
                     <div
                       key={hIndex}
-                      className="flex gap-3 text-gray-700 dark:text-gray-300"
+                      className="flex gap-3 text-ink/85 dark:text-stone-300 text-[0.95rem] leading-relaxed"
                     >
-                      <span className="text-blue-600 dark:text-blue-400 font-bold flex-shrink-0 mt-1">
-                        •
+                      <span className="text-rose-500 dark:text-rose-400 font-medium flex-shrink-0 mt-0.5">
+                        ·
                       </span>
                       <span>{highlight}</span>
                     </div>
@@ -152,17 +155,13 @@ export default function Experience() {
           </div>
         </motion.div>
 
-        {/* Bottom CTA */}
         <motion.div
-          className="mt-12 text-center"
+          className="mt-14 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <a
-            href="#contact"
-            className="btn-primary"
-          >
+          <a href="#contact" className="btn-primary">
             Interested? Let's Chat!
           </a>
         </motion.div>

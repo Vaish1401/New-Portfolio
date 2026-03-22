@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import { Mail, Linkedin, Github, Send, MapPin, Phone } from 'lucide-react'
+import { Mail, Linkedin, Github, Send, MapPin } from 'lucide-react'
 
 export default function Contact() {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true })
@@ -23,7 +23,6 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Here you would typically send the form data to a backend or email service
     console.log('Form submitted:', formData)
     setSubmitted(true)
     setFormData({ name: '', email: '', subject: '', message: '' })
@@ -53,7 +52,7 @@ export default function Contact() {
       icon: MapPin,
       title: 'Location',
       value: 'Noida, Uttar Pradesh, India',
-      //link: '#',
+      link: null,
     },
   ]
 
@@ -79,10 +78,11 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800"
+      className="py-28 md:py-36 px-4 sm:px-6 lg:px-10 bg-white/60 dark:bg-gray-950/35"
       ref={ref}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        <p className="section-eyebrow">Contact</p>
         <motion.h2
           className="section-title"
           initial={{ opacity: 0, y: -20 }}
@@ -91,75 +91,96 @@ export default function Contact() {
         >
           Get In Touch
         </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.6 }}
+          animate={inView ? { opacity: 1, scaleX: 1 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="section-divider origin-center mb-12"
+        />
 
         <motion.p
-          className="text-center text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto"
+          className="text-center text-lg text-ink-muted dark:text-stone-400 mb-14 max-w-2xl mx-auto leading-relaxed"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Have a project in mind or want to collaborate? I'd love to hear from you. Feel free to reach out!
+          Have a project in mind or want to collaborate? I'd love to hear from you.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Information */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           <motion.div
-            className="space-y-6"
+            className="space-y-5"
             variants={containerVariants}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+            <h3 className="font-display text-2xl font-semibold text-ink dark:text-white mb-2">
               Connect With Me
             </h3>
 
             {contactMethods.map((method, index) => {
               const Icon = method.icon
-              return (
-                <motion.a
-                  key={index}
-                  href={method.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={itemVariants}
-                  className="card p-6 flex items-start gap-4 hover:shadow-lg transition-shadow duration-300"
-                >
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex-shrink-0">
-                    <Icon className="text-blue-600 dark:text-blue-400" size={24} />
+              const inner = (
+                <>
+                  <div className="p-3.5 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/50 dark:to-pink-950/30 rounded-xl flex-shrink-0 border border-rose-100/50 dark:border-rose-900/40">
+                    <Icon className="text-rose-600 dark:text-rose-300" size={22} strokeWidth={1.75} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                    <h4 className="font-semibold text-ink dark:text-white">
                       {method.title}
                     </h4>
-                    <p className="text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-ink-muted dark:text-stone-400 mt-1 text-sm">
                       {method.value}
                     </p>
                   </div>
-                </motion.a>
+                </>
+              )
+
+              if (method.link) {
+                return (
+                  <motion.a
+                    key={index}
+                    href={method.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variants={itemVariants}
+                    className="card p-5 flex items-start gap-4 hover:scale-[1.01] transition-transform duration-300"
+                  >
+                    {inner}
+                  </motion.a>
+                )
+              }
+
+              return (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="card p-5 flex items-start gap-4"
+                >
+                  {inner}
+                </motion.div>
               )
             })}
 
-            {/* Resume Download */}
             <motion.div
               variants={itemVariants}
-              className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700"
+              className="mt-8 pt-8 border-t border-rose-100/80 dark:border-rose-900/40"
             >
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-ink-muted dark:text-stone-500 mb-4 text-sm">
                 Want to see my resume?
               </p>
               <a
                 href="https://drive.google.com/file/d/1htDyNP8TRykrKmqUT86tvC_xbMmKUA0w/view?usp=drive_link"
-                className="btn-primary"
+                className="btn-primary text-sm"
               >
-                📄 Download Resume
+                Download Resume
               </a>
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
-            className="card p-8"
+            className="card p-8 md:p-9"
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
@@ -168,16 +189,15 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-green-100 dark:bg-green-900/20 border border-green-400 dark:border-green-700 rounded-lg text-green-700 dark:text-green-300"
+                className="mb-6 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-200 text-sm"
               >
-                ✓ Thanks for reaching out! I'll get back to you soon.
+                Thanks for reaching out! I'll get back to you soon.
               </motion.div>
             )}
 
-            <div className="space-y-6">
-              {/* Name */}
+            <div className="space-y-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-ink/80 dark:text-stone-300 mb-2">
                   Your Name
                 </label>
                 <input
@@ -187,14 +207,13 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                  placeholder="Vaishnavi SIngh"
+                  className="input-premium"
+                  placeholder="Your name"
                 />
               </div>
 
-              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-ink/80 dark:text-stone-300 mb-2">
                   Email Address
                 </label>
                 <input
@@ -204,14 +223,13 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                  placeholder="vaishnavi@example.com"
+                  className="input-premium"
+                  placeholder="you@example.com"
                 />
               </div>
 
-              {/* Subject */}
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-ink/80 dark:text-stone-300 mb-2">
                   Subject
                 </label>
                 <input
@@ -221,14 +239,13 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                  placeholder="Project Inquiry"
+                  className="input-premium"
+                  placeholder="Project inquiry"
                 />
               </div>
 
-              {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-ink/80 dark:text-stone-300 mb-2">
                   Message
                 </label>
                 <textarea
@@ -238,17 +255,13 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows="4"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none"
+                  className="input-premium resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full btn-primary justify-center"
-              >
-                <Send size={20} />
+              <button type="submit" className="w-full btn-primary justify-center mt-2">
+                <Send size={20} strokeWidth={1.75} />
                 Send Message
               </button>
             </div>
