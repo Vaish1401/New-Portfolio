@@ -38,9 +38,13 @@ export default function Hero() {
           variants={itemVariants}
           className="mb-8"
         >
-          <div className="w-32 h-32 mx-auto bg-gradient-to-br from-blue-600 to-cyan-500 rounded-full flex items-center justify-center text-5xl font-bold text-white shadow-lg">
-            VS
-          </div>
+          <img
+            src="/profile.png"
+            alt="Vaishnavi Singh — professional headshot with a natural outdoor background"
+            width={176}
+            height={176}
+            className="w-36 h-36 sm:w-44 sm:h-44 mx-auto rounded-full object-cover object-[center_25%] shadow-xl ring-4 ring-white/70 dark:ring-gray-700/80"
+          />
         </motion.div>
 
         {/* Name */}
